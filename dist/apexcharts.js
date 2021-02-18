@@ -2041,8 +2041,7 @@
             var pointY = (w.globals.maxY - w.globals.minY) / w.globals.gridHeight;
             y2 = (w.globals.maxY - anno.y2) / pointY;
             anno.offsetY = y2;
-          } // console.log(anno.offsetY)
-
+          }
 
           var line = this.annoCtx.graphics.drawLine(x1 + anno.offsetX, // x1
           0 + anno.offsetY, // y1
@@ -2766,13 +2765,20 @@
         if (anno.image.path) {
           var imgWidth = anno.image.width ? anno.image.width : 20;
           var imgHeight = anno.image.height ? anno.image.height : 20;
+          var cssClass = '';
+
+          if (anno.image.cssClass) {
+            cssClass = anno.image.cssClass;
+          }
+
           this.annoCtx.addImage({
             x: x + anno.image.offsetX - imgWidth / 2,
             y: y + anno.image.offsetY - imgHeight / 2,
             width: imgWidth,
             height: imgHeight,
             path: anno.image.path,
-            appendTo: '.apexcharts-point-annotations'
+            appendTo: '.apexcharts-point-annotations',
+            cssClass: cssClass
           });
         }
       }
@@ -4089,13 +4095,23 @@
             _params$height = params.height,
             height = _params$height === void 0 ? 20 : _params$height,
             _params$appendTo2 = params.appendTo,
-            appendTo = _params$appendTo2 === void 0 ? '.apexcharts-annotations' : _params$appendTo2;
+            appendTo = _params$appendTo2 === void 0 ? '.apexcharts-annotations' : _params$appendTo2,
+            _params$cssClass = params.cssClass,
+            cssClass = _params$cssClass === void 0 ? '' : _params$cssClass;
         var img = w.globals.dom.Paper.image(path);
         img.size(width, height).move(x, y);
         var parent = w.globals.dom.baseEl.querySelector(appendTo);
 
         if (parent) {
+          if (cssClass) {
+            img.node.setAttribute('class', cssClass);
+          }
+
           parent.appendChild(img.node);
+
+          parent.onclick = function () {
+            console.log('clickkkk');
+          };
         }
       } // The addXaxisAnnotation method requires a parent class, and user calling this method externally on the chart instance may not specify parent, hence a different method
 

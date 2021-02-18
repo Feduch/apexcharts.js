@@ -167,7 +167,8 @@ export default class Annotations {
       y = 0,
       width = 20,
       height = 20,
-      appendTo = '.apexcharts-annotations'
+      appendTo = '.apexcharts-annotations',
+      cssClass = ''
     } = params
 
     let img = w.globals.dom.Paper.image(path)
@@ -175,7 +176,13 @@ export default class Annotations {
 
     const parent = w.globals.dom.baseEl.querySelector(appendTo)
     if (parent) {
+      if (cssClass) {
+        img.node.setAttribute('class', cssClass)
+      }
       parent.appendChild(img.node)
+      parent.onclick = function() {
+        console.log('clickkkk')
+      }
     }
   }
 
