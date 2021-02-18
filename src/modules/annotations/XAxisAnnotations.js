@@ -37,13 +37,19 @@ export default class XAnnotations {
     if (!Utils.isNumber(x1)) return
 
     if (anno.x2 === null || typeof anno.x2 === 'undefined') {
-      const y2 = anno.y2 ? anno.y2 : w.globals.gridHeight + anno.offsetY
+      let y2 = 0
+
+      if (anno.y2 !== null || typeof anno.y2 !== 'undefined') {
+        const pointY = (w.globals.maxY - w.globals.minY) / w.globals.gridHeight
+        y2 = (w.globals.maxY - anno.y2) / pointY
+        anno.offsetY = y2
+      }
 
       let line = this.annoCtx.graphics.drawLine(
         x1 + anno.offsetX, // x1
         0 + anno.offsetY, // y1
         x1 + anno.offsetX, // x2
-        y2, // y2
+        w.globals.gridHeight + anno.offsetY - y2,
         anno.borderColor, // lineColor
         strokeDashArray, //dashArray
         anno.borderWidth
@@ -129,6 +135,7 @@ export default class XAnnotations {
     // after placing the annotations on svg, set any vertically placed annotations
     this.annoCtx.helpers.setOrientations(anno, index)
   }
+
   drawXAxisAnnotations() {
     let w = this.w
 
