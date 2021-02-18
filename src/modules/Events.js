@@ -67,6 +67,7 @@ export default class Events {
           if (e.type === 'mousemove' || e.type === 'touchmove') {
             if (typeof w.config.chart.events.mouseMove === 'function') {
               w.config.chart.events.mouseMove(e, me, opts)
+              console.log(e, me, opts)
             }
           } else if (
             (e.type === 'mouseup' && e.which === 1) ||

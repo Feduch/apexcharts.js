@@ -168,7 +168,8 @@ export default class Annotations {
       width = 20,
       height = 20,
       appendTo = '.apexcharts-annotations',
-      cssClass = ''
+      cssClass = '',
+      eventId = ''
     } = params
 
     let img = w.globals.dom.Paper.image(path)
@@ -179,10 +180,10 @@ export default class Annotations {
       if (cssClass) {
         img.node.setAttribute('class', cssClass)
       }
-      parent.appendChild(img.node)
-      parent.onclick = function() {
-        console.log('clickkkk')
+      if (eventId) {
+        img.node.setAttribute('event-id', eventId)
       }
+      parent.appendChild(img.node)
     }
   }
 

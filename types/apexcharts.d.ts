@@ -410,7 +410,8 @@ type PointAnnotations = {
     height?: number
     offsetX?: number
     offsetY?: number,
-    class?: string
+    cssClass?: string,
+    eventId?: number,
   }
 }
 

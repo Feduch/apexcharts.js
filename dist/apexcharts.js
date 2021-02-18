@@ -2766,9 +2766,14 @@
           var imgWidth = anno.image.width ? anno.image.width : 20;
           var imgHeight = anno.image.height ? anno.image.height : 20;
           var cssClass = '';
+          var eventId = '';
 
           if (anno.image.cssClass) {
             cssClass = anno.image.cssClass;
+          }
+
+          if (anno.image.eventId) {
+            eventId = anno.image.eventId;
           }
 
           this.annoCtx.addImage({
@@ -2778,7 +2783,8 @@
             height: imgHeight,
             path: anno.image.path,
             appendTo: '.apexcharts-point-annotations',
-            cssClass: cssClass
+            cssClass: cssClass,
+            eventId: eventId
           });
         }
       }
@@ -3139,8 +3145,8 @@
               updated: undefined,
               click: undefined,
               mouseMove: undefined,
-              legendClick: undefined,
               markerClick: undefined,
+              pointClick: undefined,
               selection: undefined,
               dataPointSelection: undefined,
               dataPointMouseEnter: undefined,
@@ -4097,7 +4103,9 @@
             _params$appendTo2 = params.appendTo,
             appendTo = _params$appendTo2 === void 0 ? '.apexcharts-annotations' : _params$appendTo2,
             _params$cssClass = params.cssClass,
-            cssClass = _params$cssClass === void 0 ? '' : _params$cssClass;
+            cssClass = _params$cssClass === void 0 ? '' : _params$cssClass,
+            _params$eventId = params.eventId,
+            eventId = _params$eventId === void 0 ? '' : _params$eventId;
         var img = w.globals.dom.Paper.image(path);
         img.size(width, height).move(x, y);
         var parent = w.globals.dom.baseEl.querySelector(appendTo);
@@ -4107,11 +4115,11 @@
             img.node.setAttribute('class', cssClass);
           }
 
-          parent.appendChild(img.node);
+          if (eventId) {
+            img.node.setAttribute('event-id', eventId);
+          }
 
-          parent.onclick = function () {
-            console.log('clickkkk');
-          };
+          parent.appendChild(img.node);
         }
       } // The addXaxisAnnotation method requires a parent class, and user calling this method externally on the chart instance may not specify parent, hence a different method
 
@@ -12602,6 +12610,7 @@
             if (e.type === 'mousemove' || e.type === 'touchmove') {
               if (typeof w.config.chart.events.mouseMove === 'function') {
                 w.config.chart.events.mouseMove(e, me, opts);
+                console.log(e, me, opts);
               }
             } else if (e.type === 'mouseup' && e.which === 1 || e.type === 'touchend') {
               if (typeof w.config.chart.events.click === 'function') {

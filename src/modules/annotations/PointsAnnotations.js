@@ -128,8 +128,12 @@ export default class PointAnnotations {
       let imgWidth = anno.image.width ? anno.image.width : 20
       let imgHeight = anno.image.height ? anno.image.height : 20
       let cssClass = ''
+      let eventId = ''
       if (anno.image.cssClass) {
         cssClass = anno.image.cssClass
+      }
+      if (anno.image.eventId) {
+        eventId = anno.image.eventId
       }
       this.annoCtx.addImage({
         x: x + anno.image.offsetX - imgWidth / 2,
@@ -138,7 +142,8 @@ export default class PointAnnotations {
         height: imgHeight,
         path: anno.image.path,
         appendTo: '.apexcharts-point-annotations',
-        cssClass
+        cssClass,
+        eventId
       })
     }
   }

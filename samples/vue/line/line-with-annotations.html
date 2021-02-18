@@ -83,7 +83,12 @@
             chart: {
               height: 350,
               type: 'line',
-              id: 'areachart-2'
+              id: 'areachart-2',
+              events: {
+                mouseMove: function(event, chartContext, { seriesIndex, dataPointIndex, config}) {
+                  console.log(event)
+                }
+              }
             },
             annotations: {
               yaxis: [{
@@ -171,7 +176,8 @@
                 },
                 image: {
                   path: '../../assets/images/ico-instagram.png',
-                  cssClass: 'test'
+                  cssClass: 'test',
+                  eventId: '333342342324'
                 }
               }]
             },
