@@ -360,6 +360,8 @@ type AnnotationStyle = {
 type XAxisAnnotations = {
   x?: null | number | string
   x2?: null | number | string
+  y?: null | number | string
+  y2?: null | number | string
   strokeDashArray?: number
   fillColor?: string
   borderColor?: string

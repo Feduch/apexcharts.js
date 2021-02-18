@@ -37,11 +37,13 @@ export default class XAnnotations {
     if (!Utils.isNumber(x1)) return
 
     if (anno.x2 === null || typeof anno.x2 === 'undefined') {
+      const y2 = anno.y2 ? anno.y2 : w.globals.gridHeight + anno.offsetY
+
       let line = this.annoCtx.graphics.drawLine(
         x1 + anno.offsetX, // x1
         0 + anno.offsetY, // y1
         x1 + anno.offsetX, // x2
-        w.globals.gridHeight + anno.offsetY, // y2
+        y2, // y2
         anno.borderColor, // lineColor
         strokeDashArray, //dashArray
         anno.borderWidth
