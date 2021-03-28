@@ -79,11 +79,19 @@ export default class XAnnotations {
         x2 = temp
       }
 
+      let y2 = 0
+
+      if (anno.y2 !== null || typeof anno.y2 !== 'undefined') {
+        const pointY = (w.globals.maxY - w.globals.minY) / w.globals.gridHeight
+        y2 = (w.globals.maxY - anno.y2) / pointY
+        anno.offsetY = y2
+      }
+
       let rect = this.annoCtx.graphics.drawRect(
         x1 + anno.offsetX, // x1
         0 + anno.offsetY, // y1
         x2 - x1, // x2
-        w.globals.gridHeight + anno.offsetY, // y2
+        w.globals.gridHeight + anno.offsetY - y2, // y2
         0, // radius
         anno.fillColor, // color
         anno.opacity, // opacity,

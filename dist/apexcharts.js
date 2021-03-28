@@ -2071,10 +2071,19 @@
             x2 = temp;
           }
 
+          var _y = 0;
+
+          if (anno.y2 !== null || typeof anno.y2 !== 'undefined') {
+            var _pointY = (w.globals.maxY - w.globals.minY) / w.globals.gridHeight;
+
+            _y = (w.globals.maxY - anno.y2) / _pointY;
+            anno.offsetY = _y;
+          }
+
           var rect = this.annoCtx.graphics.drawRect(x1 + anno.offsetX, // x1
           0 + anno.offsetY, // y1
           x2 - x1, // x2
-          w.globals.gridHeight + anno.offsetY, // y2
+          w.globals.gridHeight + anno.offsetY - _y, // y2
           0, // radius
           anno.fillColor, // color
           anno.opacity, // opacity,
