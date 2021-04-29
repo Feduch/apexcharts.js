@@ -476,11 +476,10 @@ type ApexPlotOptions = {
   }
   bar?: {
     horizontal?: boolean
-    endingShape?: 'flat' | 'rounded'
-    startingShape?: 'flat' | 'rounded'
     columnWidth?: string
     barHeight?: string
     distributed?: boolean
+    borderRadius?: number
     rangeBarOverlap?: boolean
     rangeBarGroupRows?: boolean
     colors?: {
@@ -788,7 +787,9 @@ type ApexMarkers = {
   strokeDashArray?: number | number[]
   fillOpacity?: number | number[]
   discrete?: ApexDiscretePoint[]
-  shape?: 'circle' | 'square' | string[]
+  shape?: "circle" | "square" | "rect" | string[];
+  width?: number | number[]
+  height?: number | number[]
   radius?: number
   offsetX?: number
   offsetY?: number
@@ -842,7 +843,7 @@ type ApexDataLabels = {
     dropShadow: ApexDropShadow
   }
   dropShadow?: ApexDropShadow
-  formatter?(val: number, opts?: any): string | number
+  formatter?(val: string | number | number[], opts?: any): string | number
 }
 
 type ApexResponsive = {

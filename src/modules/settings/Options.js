@@ -389,8 +389,7 @@ export default class Options {
           columnWidth: '70%', // should be in percent 0 - 100
           barHeight: '70%', // should be in percent 0 - 100
           distributed: false,
-          startingShape: 'flat', // deprecated
-          endingShape: 'flat', // deprecated
+          borderRadius: 0,
           rangeBarOverlap: true,
           rangeBarGroupRows: false,
           colors: {
@@ -775,6 +774,8 @@ export default class Options {
         strokeDashArray: 0,
         fillOpacity: 1,
         shape: 'circle',
+        width: 8, // only applicable when shape is rect/square
+        height: 8, // only applicable when shape is rect/square
         radius: 2,
         offsetX: 0,
         offsetY: 0,
@@ -910,7 +911,6 @@ export default class Options {
         type: 'category',
         categories: [],
         convertedCatToNumeric: false, // internal property which should not be altered outside
-        sorted: false,
         offsetX: 0,
         offsetY: 0,
         labels: {
@@ -939,7 +939,8 @@ export default class Options {
             month: "MMM 'yy",
             day: 'dd MMM',
             hour: 'HH:mm',
-            minute: 'HH:mm:ss'
+            minute: 'HH:mm:ss',
+            second: 'HH:mm:ss'
           }
         },
         axisBorder: {
